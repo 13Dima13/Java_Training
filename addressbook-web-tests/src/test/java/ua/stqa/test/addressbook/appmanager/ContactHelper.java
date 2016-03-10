@@ -26,16 +26,16 @@ public class ContactHelper extends BaseHelper {
     click(By.linkText("home page"));
   }
 
-  public void fillinAllInfo(InfoContacts infoContact, boolean creation ) {
-    type(By.name("firstname"), infoContact.getName());
-    type(By.name("middlename"), infoContact.getMiddle());
-    type(By.name("lastname"), infoContact.getLastname());
-    type(By.name("nickname"), infoContact.getNickname());
-    type(By.name("title"), infoContact.getTitle());
-    type(By.name("company"), infoContact.getCompany());
+  public void fillinAllInfo(InfoContacts infoContacts, boolean creation ) {
+    type(By.name("firstname"), infoContacts.getName());
+    type(By.name("middlename"), infoContacts.getMiddle());
+    type(By.name("lastname"), infoContacts.getLastname());
+    type(By.name("nickname"), infoContacts.getNickname());
+    type(By.name("title"), infoContacts.getTitle());
+    type(By.name("company"), infoContacts.getCompany());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(infoContact.getGroup());
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(infoContacts.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }

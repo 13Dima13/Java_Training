@@ -45,6 +45,7 @@ public class InfoContacts extends TestBase {
     return company;
   }
 
+
   public String getGroup() {
     return group;
   }
