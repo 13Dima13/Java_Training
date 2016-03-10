@@ -7,18 +7,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.NoSuchElementException;
 
-public class BaseHelper {
+public class HelperBase {
   protected WebDriver wd;
 
-  public BaseHelper(WebDriver wd) {
+  public HelperBase(WebDriver wd) {
     this.wd = wd;
   }
 
-  protected void click(By locator) {
+  public void click(By locator) {
     wd.findElement(locator).click();
   }
 
-  protected void type(By locator, String text) {
+  public void type(By locator, String text) {
     click(locator);
     wd.findElement(locator).clear();
     wd.findElement(locator).sendKeys(text);
@@ -33,7 +33,6 @@ public class BaseHelper {
     }
   }
 
-
   public boolean isElementPresent(By locator) {
     try {
       wd.findElement(locator);
@@ -41,5 +40,9 @@ public class BaseHelper {
     } catch (NoSuchElementException ex) {
       return false;
     }
+  }
+
+  public void openHomePage() {
+    click(By.linkText("home page"));
   }
 }

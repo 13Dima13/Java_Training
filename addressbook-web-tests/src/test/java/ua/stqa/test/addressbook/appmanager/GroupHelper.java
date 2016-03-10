@@ -3,10 +3,9 @@ package ua.stqa.test.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ua.stqa.test.addressbook.model.GroupData;
 
-public class GroupHelper extends BaseHelper{
+public class GroupHelper extends HelperBase {
 
   public GroupHelper(WebDriver wd) {
     super(wd);

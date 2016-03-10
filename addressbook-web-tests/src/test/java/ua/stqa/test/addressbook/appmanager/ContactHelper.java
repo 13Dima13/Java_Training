@@ -2,14 +2,11 @@ package ua.stqa.test.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ua.stqa.test.addressbook.model.InfoContacts;
 
-import java.util.NoSuchElementException;
-
-public class ContactHelper extends BaseHelper {
+public class ContactHelper extends HelperBase {
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
@@ -20,10 +17,6 @@ public class ContactHelper extends BaseHelper {
 
   public void addNew() {
     click(By.name("submit"));
-  }
-
-  public void openHomePage() {
-    click(By.linkText("home page"));
   }
 
   public void fillinAllInfo(InfoContacts infoContacts, boolean creation ) {
