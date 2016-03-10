@@ -9,14 +9,16 @@ public class InfoContacts extends TestBase {
   private final String nickname;
   private final String title;
   private final String company;
+  private String group;
 
-  public InfoContacts(String name, String middle, String lastname, String nickname, String title, String company) {
+  public InfoContacts(String name, String middle, String lastname, String nickname, String title, String company, String group) {
     this.name = name;
     this.middle = middle;
     this.lastname = lastname;
     this.nickname = nickname;
     this.title = title;
     this.company = company;
+    this.group = group;
   }
 
   public String getName() {
@@ -41,5 +43,9 @@ public class InfoContacts extends TestBase {
 
   public String getCompany() {
     return company;
+  }
+
+  public String getGroup() {
+    return group;
   }
 }
