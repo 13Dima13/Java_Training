@@ -10,6 +10,6 @@ public class ContactCreationTests extends TestBase {
         app.getContactHelper().addNewButton();
         app.getContactHelper().fillinAllInfo(new InfoContacts("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"), true);
         app.getContactHelper().addNew();
-        app.getContactHelper().openHomePage();
+        app.getNavigationHelper().openHomePage();
     }
 }

@@ -10,7 +10,7 @@ public class ContactModificationTests extends TestBase {
     app.getContactHelper().modifyContact();
     app.getContactHelper().fillinAllInfo(new InfoContacts("Name", "aka", "LastName", "SDA", "MMM", "HOME", null), false);
     app.getContactHelper().updateContact();
-    app.getContactHelper().openHomePage();
+    app.getNavigationHelper().openHomePage();
   }
 
 }
