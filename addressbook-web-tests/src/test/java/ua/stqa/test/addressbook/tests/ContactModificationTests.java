@@ -8,6 +8,11 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification (){
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().selectContact();
+    } else {
+      app.getContactHelper().addNewButton();
+      app.getContactHelper().fillinAllInfo(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"), true);
+      app.getContactHelper().addNew();
+      app.getNavigationHelper().openHomePage();
     }
     app.getContactHelper().modifyContact();
     app.getContactHelper().fillinAllInfo(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", null), false);
