@@ -15,7 +15,7 @@ public class GroupHelper extends HelperBase {
     click(By.linkText("group page"));
   }
 
-  public void submitGroupCreation(GroupData test1) {
+  public void submitGroupCreation() {
     click(By.name("submit"));
   }
 
@@ -47,5 +47,12 @@ public class GroupHelper extends HelperBase {
 
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public void createGroup(GroupData group) {
+    initGroupCreation();
+    fillGroupForm(group);
+    submitGroupCreation();
+    returnToGroupPage();
   }
 }
