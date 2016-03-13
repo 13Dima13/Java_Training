@@ -6,7 +6,9 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification (){
-    app.getContactHelper().selectContact();
+    if (! app.getContactHelper().isThereAContact()) {
+      app.getContactHelper().selectContact();
+    }
     app.getContactHelper().modifyContact();
     app.getContactHelper().fillinAllInfo(new InfoContacts("Name", "aka", "LastName", "SDA", "MMM", "HOME", null), false);
     app.getContactHelper().updateContact();
