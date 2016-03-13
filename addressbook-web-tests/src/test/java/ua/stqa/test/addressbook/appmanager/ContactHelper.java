@@ -58,4 +58,8 @@ public class ContactHelper extends HelperBase {
   public void deleteContact() {
     click(By.xpath(".//*[@value='Delete']"));
   }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("Details"));
+  }
 }
