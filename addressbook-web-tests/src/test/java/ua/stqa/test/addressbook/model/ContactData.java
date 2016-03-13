@@ -2,7 +2,7 @@ package ua.stqa.test.addressbook.model;
 
 import ua.stqa.test.addressbook.tests.TestBase;
 
-public class InfoContacts extends TestBase {
+public class ContactData extends TestBase {
   private final String name;
   private final String middle;
   private final String lastname;
@@ -11,7 +11,7 @@ public class InfoContacts extends TestBase {
   private final String company;
   private String group;
 
-  public InfoContacts(String name, String middle, String lastname, String nickname, String title, String company, String group) {
+  public ContactData(String name, String middle, String lastname, String nickname, String title, String company, String group) {
     this.name = name;
     this.middle = middle;
     this.lastname = lastname;
