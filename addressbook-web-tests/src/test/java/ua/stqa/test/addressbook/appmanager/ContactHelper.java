@@ -19,7 +19,7 @@ public class ContactHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillinAllInfo(ContactData contactData, boolean creation ) {
+  public void fillinAllInfo(ContactData contactData) {
     type(By.name("firstname"), contactData.getName());
     type(By.name("middlename"), contactData.getMiddle());
     type(By.name("lastname"), contactData.getLastname());
@@ -27,10 +27,8 @@ public class ContactHelper extends HelperBase {
     type(By.name("title"), contactData.getTitle());
     type(By.name("company"), contactData.getCompany());
 
-    if (creation) {
+    if (isElementPresent(By.name("new_group"))) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
@@ -40,7 +38,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void modifyContact() {
-    click(By.xpath("//div/div[4]/form[1]/input[2]"));
+    click(By.cssSelector("img[alt='Edit']"));
   }
 
   public void updateContact() {
@@ -61,5 +59,14 @@ public class ContactHelper extends HelperBase {
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("Details"));
+  }
+  public void returnToHomePage() {
+    click(By.linkText("home page"));
+  }
+  public void createContact(ContactData contact) {
+    addNewButton();
+    fillinAllInfo(contact);
+    updateContact();
+    returnToHomePage();
   }
 }

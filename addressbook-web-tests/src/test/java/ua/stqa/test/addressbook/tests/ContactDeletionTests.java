@@ -6,13 +6,8 @@ import ua.stqa.test.addressbook.model.ContactData;
 public class ContactDeletionTests extends TestBase{
   @Test
   public void testContactDeletion(){
-    if (app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().selectContactForDelete();
-    } else {
-      app.getContactHelper().addNewButton();
-      app.getContactHelper().fillinAllInfo(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"), true);
-      app.getContactHelper().addNew();
-      app.getNavigationHelper().openHomePage();
+    if (! app.getContactHelper().isThereAContact()) {
+      app.getContactHelper().createContact(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"));
     }
     app.getContactHelper().selectContactForDelete();
     app.getContactHelper().deleteContact();
