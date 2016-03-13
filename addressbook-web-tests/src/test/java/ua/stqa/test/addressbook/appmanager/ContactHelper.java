@@ -3,7 +3,6 @@ package ua.stqa.test.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import ua.stqa.test.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -30,11 +29,6 @@ public class ContactHelper extends HelperBase {
     if (isElementPresent(By.name("new_group"))) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     }
-  }
-
-  public void selectContact() {
-
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img"));
   }
 
   public void modifyContact() {
