@@ -11,8 +11,8 @@ public class Collections {
 
     List <String> languages = Arrays.asList("Java", "C#", "Python", "PHP");
 
-    for (int i = 0; i < languages.size(); i++) {
-      System.out.println("I want to learn " + languages.get(i));
+    for (String l : languages) {
+      System.out.println("I want to learn " + l);
     }
   }
 }
