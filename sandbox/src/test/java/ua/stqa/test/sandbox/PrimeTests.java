@@ -8,7 +8,7 @@ import ua.stqa.test.sandbox.sandbox.Primes;
 public class PrimeTests {
   @Test
   public void testPrime() {
-    Assert.assertTrue(Primes.isPrime(Integer.MAX_VALUE));
+    Assert.assertTrue(Primes.isPrimeFast(Integer.MAX_VALUE));
   }
 
   @Test
@@ -17,7 +17,7 @@ public class PrimeTests {
   }
 
 
-  @Test (enabled = false)
+  @Test (enabled = false) // Отключение теста
   public void testPrimeLong() { //действия с длинными числами, всегда длинее
     long n = Integer.MAX_VALUE;
     Assert.assertTrue(Primes.isPrime(n));
