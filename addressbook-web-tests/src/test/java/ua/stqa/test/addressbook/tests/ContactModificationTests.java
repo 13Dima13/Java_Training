@@ -1,5 +1,6 @@
 package ua.stqa.test.addressbook.tests;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.stqa.test.addressbook.model.ContactData;
 
@@ -8,19 +9,20 @@ import java.util.List;
 
 
 public class ContactModificationTests extends TestBase {
+  @BeforeMethod
+  public  void ensurePreconditions() {
+    if ( app.contact().isThereAContact()) {
+      app.contact().createContact(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"));
+    }
+
+  }
 
   @Test (enabled =  false)
   public void testContactModification (){
-    List<ContactData> before = app.getContactHelper().getContactList();
     ContactData contact = new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2");
-    if ( app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"));
-    }
-    app.getContactHelper().modifyContact();
-    app.getContactHelper().fillinAllInfo(contact);
-    app.getContactHelper().updateContact();
-    app.getNavigationHelper().openHomePage();
-    List <ContactData> after = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
+    app.contact().modifyContact(contact);
+    List <ContactData> after = app.contact().list();
     Assert.assertEquals(after, before);
 
     before.remove(before.size() -1 );
@@ -33,6 +35,7 @@ public class ContactModificationTests extends TestBase {
 
 
   }
+
 
 }
 

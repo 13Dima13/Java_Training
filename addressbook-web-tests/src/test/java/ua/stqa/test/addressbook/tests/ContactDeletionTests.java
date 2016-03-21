@@ -8,17 +8,19 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactDeletionTests extends TestBase{
+
+
   @Test (enabled =  false)
   public void testContactDeletion(){
-    List<ContactData> before = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
     ContactData contact = new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2");
-    if ( app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"));
+    if ( app.contact().isThereAContact()) {
+      app.contact().createContact(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"));
     }
-    app.getContactHelper().selectContactForDelete();
-    app.getContactHelper().deleteContact();
-    app.getContactHelper().confirmRemove();
-    List <ContactData> after = app.getContactHelper().getContactList();
+    app.contact().selectContactForDelete();
+    app.contact().deleteContact();
+    app.contact().confirmRemove();
+    List <ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() -1);
 
     before.remove(before.size() - 1);
@@ -26,12 +28,6 @@ public class ContactDeletionTests extends TestBase{
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(before, after);
-
-
-
-
-
-
   }
 
 }
