@@ -21,7 +21,7 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification (){
     ContactData contact = new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2");
     List<ContactData> before = app.contact().list();
-    app.contact().modifyContact(contact);
+    app.contact().modify(contact);
     List <ContactData> after = app.contact().list();
     Assert.assertEquals(after, before);
 
