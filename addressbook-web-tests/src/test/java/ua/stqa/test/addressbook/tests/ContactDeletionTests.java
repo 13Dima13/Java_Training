@@ -10,16 +10,17 @@ import java.util.List;
 public class ContactDeletionTests extends TestBase{
 
 
-  @Test (enabled =  false)
+  @Test //(enabled =  false)
   public void testContactDeletion(){
     List<ContactData> before = app.contact().list();
     ContactData contact = new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2");
-    if ( app.contact().isThereAContact()) {
+    if ( app.contact().list().size() == 0) {
       app.contact().createContact(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"));
     }
     app.contact().selectContactForDelete();
     app.contact().deleteContact();
     app.contact().confirmRemove();
+    app.goTo().openHomePage();
     List <ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() -1);
 

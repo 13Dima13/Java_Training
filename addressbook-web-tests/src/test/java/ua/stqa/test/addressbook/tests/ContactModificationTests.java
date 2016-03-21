@@ -11,13 +11,13 @@ import java.util.List;
 public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public  void ensurePreconditions() {
-    if ( app.contact().isThereAContact()) {
+    if ( app.contact().list().size() == 0 ) {
       app.contact().createContact(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"));
     }
 
   }
 
-  @Test (enabled =  false)
+  @Test //(enabled =  false)
   public void testContactModification (){
     ContactData contact = new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2");
     List<ContactData> before = app.contact().list();
