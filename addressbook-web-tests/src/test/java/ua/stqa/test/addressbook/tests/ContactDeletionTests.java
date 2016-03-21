@@ -17,10 +17,7 @@ public class ContactDeletionTests extends TestBase{
     if ( app.contact().list().size() == 0) {
       app.contact().createContact(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"));
     }
-    app.contact().selectContactForDelete();
-    app.contact().deleteContact();
-    app.contact().confirmRemove();
-    app.goTo().openHomePage();
+    app.contact().delete();
     List <ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() -1);
 
@@ -30,5 +27,7 @@ public class ContactDeletionTests extends TestBase{
     after.sort(byId);
     Assert.assertEquals(before, after);
   }
+
+
 
 }

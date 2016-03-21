@@ -35,7 +35,7 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void modifyContact() {
+  public void modify() {
     click(By.cssSelector("img[alt='Edit']"));
   }
 
@@ -68,11 +68,24 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public void modifyContact(ContactData contact) {
-    modifyContact();
+  public void modify(ContactData contact) {
+    modify();
     fillinAllInfo(contact);
     updateContact();
     returnToHomePage();
+  }
+  public void delete() {
+    selectContactForDelete();
+    deleteContact();
+    confirmRemove();
+    openHomePage();
+  }
+
+  private void openHomePage() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home page"));
   }
 
   public int getContactCount() {
