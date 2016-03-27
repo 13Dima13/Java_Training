@@ -4,38 +4,62 @@ import ua.stqa.test.addressbook.tests.TestBase;
 
 public class ContactData extends TestBase {
   private int id;
-  private final String name;
-  private final String middle;
-  private final String lastname;
-  private final String nickname;
-  private final String title;
-  private final String company;
+  private  String firstName;
+  private  String middleName;
+  private  String mobileNumber;
+  private  String nickname;
+  private  String title;
+  private  String company;
   private String group;
+  private String lastName;
+  private String email;
 
+  public ContactData withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
 
-  public ContactData(String name, String middle, String lastname, String nickname, String title, String company, String group) {
-    this.name = name;
-    this.middle = middle;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.title = title;
-    this.company = company;
+  public ContactData withMiddleName(String middleName) {
+    this.middleName = middleName;
+    return this;
+  }
+
+  public ContactData withLastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+  public ContactData withMobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
     this.group = group;
+    return this;
   }
 
-  public String getName() {
-    return name;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public String getMiddle() {
-    return middle;
+  public String getMiddleName() {
+    return middleName;
   }
 
-  public String getLastname() {
-    return lastname;
+  public String getLastName() {
+    return lastName;
   }
 
-  public String getNickname() {
+  public String getMobileNumber() {
+    return nickname;
+  }
+  public String getEmail() {
     return nickname;
   }
 
@@ -60,7 +84,7 @@ public class ContactData extends TestBase {
   }
   @Override
   public int hashCode() {
-    return name != null ? name.hashCode() : 0;
+    return firstName != null ? firstName.hashCode() : 0;
   }
 
   @Override
@@ -70,18 +94,23 @@ public class ContactData extends TestBase {
 
     ContactData that = (ContactData) o;
 
-    if (name != null ? !name.equals(that.name) : that.name != null) return true;
-    if (middle != null ? !middle.equals(that.middle) : that.middle != null) return true;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return true;
+    if (middleName != null ? !middleName.equals(that.middleName) : that.middleName != null) return true;
+    return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
 
   }
 
   @Override
   public String toString() {
     return "ContactData{" +
-            "name='" + name + '\'' +
-            ", middle='" + middle + '\'' +
-            ", lastname='" + lastname + '\'' +
+            "name='" + firstName + '\'' +
+            ", middle='" + middleName + '\'' +
+            ", lastname='" + lastName + '\'' +
             '}';
+  }
+
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
   }
 }

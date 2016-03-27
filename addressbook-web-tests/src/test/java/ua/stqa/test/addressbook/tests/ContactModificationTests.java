@@ -8,34 +8,32 @@ import ua.stqa.test.addressbook.model.Contacts;
 import java.util.Comparator;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.AssertJUnit.assertEquals;
+
 
 public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public  void ensurePreconditions() {
     if ( app.contact().all().size() == 0 ) {
-      app.contact().createContact(new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2"));
+      app.contact().createContact(new ContactData().withFirstName("Test").withLastName("Test").withGroup("test1"));
     }
 
   }
 
-  @Test (enabled =  false)
+  @Test //(enabled =  false)
   public void testContactModification (){
-    ContactData contact = new ContactData("Name", "aka", "LastName", "SDA", "MMM", "HOME", "test2");
+    ContactData contact = new ContactData().withFirstName("Test").withLastName("Test").withGroup("test1");
     Contacts before = app.contact().all();
+    ContactData modifyContact = before.iterator().next();
     app.contact().modify(contact);
     Contacts after = app.contact().all();
-    Assert.assertEquals(after, before);
-
-    before.remove(before.size() -1 );
-    before.add(contact);
-    Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    Assert.assertEquals(before, after);
-
-
+    assertEquals(after.size(), before.size());
+    assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
+  }
 
   }
 
-
-}
 
 
