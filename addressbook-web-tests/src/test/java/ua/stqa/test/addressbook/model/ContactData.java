@@ -6,25 +6,19 @@ public class ContactData extends TestBase {
   private int id;
   private  String firstName;
   private  String middleName;
-  private  String mobile;
-  private  String work;
-  private  String home;
-  private  String nickname;
   private  String title;
-  private  String company;
   private String group;
   private String lastName;
   private String email;
+  private  String mobile;
+  private  String work;
+  private  String home;
                                         ////////////////////////////////With/////
   public ContactData withFirstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
 
-  public ContactData withMiddleName(String middleName) {
-    this.middleName = middleName;
-    return this;
-  }
 
   public ContactData withLastName(String lastName) {
     this.lastName = lastName;
@@ -83,15 +77,7 @@ public class ContactData extends TestBase {
   }
 
   public String getEmail() {
-    return nickname;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public String getCompany() {
-    return company;
+    return email;
   }
 
   public String getGroup() {
