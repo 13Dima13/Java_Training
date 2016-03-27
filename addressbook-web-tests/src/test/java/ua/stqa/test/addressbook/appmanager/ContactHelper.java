@@ -3,6 +3,7 @@ package ua.stqa.test.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import org.openqa.selenium.support.ui.Select;
 import ua.stqa.test.addressbook.model.ContactData;
 import ua.stqa.test.addressbook.model.Contacts;
@@ -99,7 +100,9 @@ public class ContactHelper extends HelperBase {
       int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
-      contacts.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname));
+      String[] phones = cells.get(5).getText().split("\n");
+      contacts.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname)
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
     }
     return contacts;
   }
@@ -113,7 +116,8 @@ public class ContactHelper extends HelperBase {
     String work = wd.findElement(By.name("work")).getAttribute("value");
     wd.navigate().back();
     return new ContactData()
-            .withId(contact.getId()).withFirstName(firstname).withLastName(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+            .withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
+            .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
 
 
   }
@@ -123,5 +127,6 @@ public class ContactHelper extends HelperBase {
     WebElement row = checkbox.findElement(By.xpath("./../.."));
     List<WebElement> cells = row.findElements(By.tagName("td"));
     modify();
+    //cells.get(7).findElements(By.tagName("a")).click();
   }
 }
