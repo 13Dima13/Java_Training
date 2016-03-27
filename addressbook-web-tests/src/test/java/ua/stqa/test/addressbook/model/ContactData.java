@@ -6,14 +6,16 @@ public class ContactData extends TestBase {
   private int id;
   private  String firstName;
   private  String middleName;
-  private  String mobileNumber;
+  private  String mobile;
+  private  String work;
+  private  String home;
   private  String nickname;
   private  String title;
   private  String company;
   private String group;
   private String lastName;
   private String email;
-
+                                        ////////////////////////////////With/////
   public ContactData withFirstName(String firstName) {
     this.firstName = firstName;
     return this;
@@ -29,8 +31,16 @@ public class ContactData extends TestBase {
     return this;
   }
 
-  public ContactData withMobileNumber(String mobileNumber) {
-    this.mobileNumber = mobileNumber;
+  public ContactData withMobilePhone(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+  public ContactData withWorkPhone(String work) {
+    this.work = work;
+    return this;
+  }
+  public ContactData withHomePhone(String home) {
+    this.home = home;
     return this;
   }
 
@@ -43,22 +53,35 @@ public class ContactData extends TestBase {
     this.group = group;
     return this;
   }
+                                        //////////////////////////Get
+
+
 
   public String getFirstName() {
     return firstName;
   }
+  public int getId() {
+    return id;
+  }
 
   public String getMiddleName() {
     return middleName;
+  }
+  public String getHomePhone() {
+    return home;
+  }
+  public String getWorkPhone() {
+    return work;
+  }
+
+  public String getMobile() {
+    return mobile;
   }
 
   public String getLastName() {
     return lastName;
   }
 
-  public String getMobileNumber() {
-    return nickname;
-  }
   public String getEmail() {
     return nickname;
   }
@@ -79,9 +102,7 @@ public class ContactData extends TestBase {
     this.id = id;
   }
 
-  public int getId() {
-    return id;
-  }
+
   @Override
   public int hashCode() {
     return firstName != null ? firstName.hashCode() : 0;
