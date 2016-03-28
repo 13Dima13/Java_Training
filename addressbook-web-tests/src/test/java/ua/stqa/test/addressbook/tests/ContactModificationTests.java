@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
     app.goTo().openHomePage();
     if (app.contact().list().size() == 0) {
       app.goTo().AddNewContactPage();
-      app.contact().create(new ContactData().withFirstName("Test").withLastName("Test"), true);
+      app.contact().create(new ContactData().withFirstName("FirstName").withLastName("Lastname"), true);
       app.goTo().openHomePage();
     }
   }
