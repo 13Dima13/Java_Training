@@ -25,9 +25,10 @@ public class ContactHelper extends HelperBase {
 
   public void fillinAllInfo(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstName());
-    type(By.name("middlename"), contactData.getMiddleName());
     type(By.name("lastname"), contactData.getLastName());
     type(By.name("mobile"), contactData.getMobile());
+    type(By.name("home"), contactData.getHomePhone());
+    type(By.name("work"), contactData.getWorkPhone());
     type(By.name("email"), contactData.getEmail());
 
     if (isElementPresent(By.name("new_group"))) {
@@ -74,13 +75,13 @@ public class ContactHelper extends HelperBase {
     updateContact();
     returnToHomePage();
   }
-  public void delete() {
-    selectContactForDelete();
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
     deleteContact();
     confirmRemove();
     openHomePage();
   }
-
+  public void selectContactById(int id) { wd.findElement(By.cssSelector("input[id='" + id +"']")).click();  }
   private void openHomePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;

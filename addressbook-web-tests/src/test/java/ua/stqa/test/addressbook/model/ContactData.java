@@ -111,8 +111,10 @@ public class ContactData extends TestBase {
   public String toString() {
     return "ContactData{" +
             "name='" + firstName + '\'' +
-            ", middle='" + middleName + '\'' +
             ", lastname='" + lastName + '\'' +
+            ", mobile='" + mobile + '\'' +
+            ", home='" + home + '\'' +
+            ", work='" + work + '\'' +
             '}';
   }
 
