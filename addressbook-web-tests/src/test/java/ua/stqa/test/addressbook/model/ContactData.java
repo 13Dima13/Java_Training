@@ -2,39 +2,34 @@ package ua.stqa.test.addressbook.model;
 
 import ua.stqa.test.addressbook.tests.TestBase;
 
+import java.io.File;
+
 public class ContactData extends TestBase {
   private int id;
   private  String firstName;
   private  String middleName;
-  private  String title;
-  private String group;
-  private String lastName;
-  private String email;
-  private  String mobile;
-  private  String work;
-  private  String home;
-                                        ////////////////////////////////With/////
+  private  String lastName;
+  private  String mobileNumber;
+  private  String email;
+  private  String group;
+
   public ContactData withFirstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
 
+  public ContactData withMiddleName(String middleName) {
+    this.middleName = middleName;
+    return this;
+  }
 
   public ContactData withLastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
 
-  public ContactData withMobilePhone(String mobile) {
-    this.mobile = mobile;
-    return this;
-  }
-  public ContactData withWorkPhone(String work) {
-    this.work = work;
-    return this;
-  }
-  public ContactData withHomePhone(String home) {
-    this.home = home;
+  public ContactData withMobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
     return this;
   }
 
@@ -47,33 +42,30 @@ public class ContactData extends TestBase {
     this.group = group;
     return this;
   }
-                                        //////////////////////////Get
 
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
+  }
 
+  public int getId() {
+    return id;
+  }
 
   public String getFirstName() {
     return firstName;
-  }
-  public int getId() {
-    return id;
   }
 
   public String getMiddleName() {
     return middleName;
   }
-  public String getHomePhone() {
-    return home;
-  }
-  public String getWorkPhone() {
-    return work;
-  }
-
-  public String getMobile() {
-    return mobile;
-  }
 
   public String getLastName() {
     return lastName;
+  }
+
+  public String getMobileNumber() {
+    return mobileNumber;
   }
 
   public String getEmail() {
@@ -84,16 +76,6 @@ public class ContactData extends TestBase {
     return group;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
-
-  @Override
-  public int hashCode() {
-    return firstName != null ? firstName.hashCode() : 0;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -101,25 +83,28 @@ public class ContactData extends TestBase {
 
     ContactData that = (ContactData) o;
 
-    if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return true;
-    if (middleName != null ? !middleName.equals(that.middleName) : that.middleName != null) return true;
+    if (id != that.id) return false;
+    if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
     return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
 
   }
 
   @Override
-  public String toString() {
-    return "ContactData{" +
-            "name='" + firstName + '\'' +
-            ", lastname='" + lastName + '\'' +
-            ", mobile='" + mobile + '\'' +
-            ", home='" + home + '\'' +
-            ", work='" + work + '\'' +
-            '}';
+  public int hashCode() {
+    int result = id;
+    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+    return result;
   }
 
-  public ContactData withId(int id) {
-    this.id = id;
-    return this;
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
+
   }
-}
+  }
+
+

@@ -16,18 +16,22 @@ import static org.testng.AssertJUnit.assertEquals;
 public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public  void ensurePreconditions() {
-    if ( app.contact().all().size() == 0 ) {
-      app.contact().createContact(new ContactData().withFirstName("Test").withLastName("Test").withGroup("test1"));
+    app.goTo().openHomePage();
+    if (app.contact().list().size() == 0) {
+      app.goTo().AddNewContactPage();
+      app.contact().create(new ContactData().withFirstName("Test").withLastName("Test"), true);
+      app.goTo().openHomePage();
     }
-
   }
 
-  @Test //(enabled =  false)
-  public void testContactModification (){
-    ContactData contact = new ContactData().withFirstName("Test").withLastName("Test").withGroup("test1");
+  @Test
+  public void testContactModification() {
     Contacts before = app.contact().all();
     ContactData modifyContact = before.iterator().next();
+    ContactData contact = new ContactData().withId(modifyContact.getId()).withFirstName("Test").withLastName("Test");
+
     app.contact().modify(contact);
+    app.goTo().openHomePage();
     Contacts after = app.contact().all();
     assertEquals(after.size(), before.size());
     assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
