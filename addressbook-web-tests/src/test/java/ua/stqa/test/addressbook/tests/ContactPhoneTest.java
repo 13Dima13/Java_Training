@@ -31,13 +31,13 @@ public class ContactPhoneTest extends TestBase {
 
   private String mergePhones(ContactData contact) {  // выбрасываем ненужные пустые строки и склеиваем строки
     return Arrays.asList(contact.getHomePhone(),contact.getMobilePhone(), contact.getWorkPhone())
-            .stream().filter((s) -> !s.equals("")) //убарли пустые строки
-            .map(ContactPhoneTest::cleaned) //удаляем все ненужные символы
+            .stream().filter((s) -> !s.equals("")) //убрали пустые строки
+            .map(ContactPhoneTest::cleaned) //удаляем все ненужные символы (чистим телефоны от символов)
             .collect(Collectors.joining("\n")); // между склеиваимыми частями будем вставлять энтер
   }
 
   public static String cleaned (String phone){  //вспомогательная функция которая приводит телефон на главной странице к очищенному виду: без тире, скобок, пробелов и тд
-    return phone.replaceAll("\\s", "").replaceAll("[-()]", ""); // в скобках указаны регуляоные выражения
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", ""); // в скобках указаны регулярные выражения
   }
 
 }
