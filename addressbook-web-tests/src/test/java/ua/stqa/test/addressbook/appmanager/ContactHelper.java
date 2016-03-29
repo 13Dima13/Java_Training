@@ -62,7 +62,7 @@ public class ContactHelper extends HelperBase {
 
   public void create(ContactData contactData, boolean b) {
 
-    fillContactForm(new ContactData().withFirstName("FirstName").withLastName("Lastname").withGroup("test1"), true);
+    fillContactForm(new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street").withGroup("test1").withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withEmail("test@test.tt"), true);
     submitContactCreation();
     contactCashe = null;
   }
