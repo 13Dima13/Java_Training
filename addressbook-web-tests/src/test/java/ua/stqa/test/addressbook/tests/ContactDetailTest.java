@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.stqa.test.addressbook.model.ContactData;
-import ua.stqa.test.addressbook.model.Contacts;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ public class ContactDetailTest extends TestBase {
     app.goTo().openHomePage();
     if (app.contact().list().size() == 0) {
       app.goTo().AddNewContactPage();
-      app.contact().create(new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street").withEmail("test@test.tt"), true);
+      app.contact().create(new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street2").withEmail("test@test.tt"), true);
       app.goTo().openHomePage();
     }
   }
