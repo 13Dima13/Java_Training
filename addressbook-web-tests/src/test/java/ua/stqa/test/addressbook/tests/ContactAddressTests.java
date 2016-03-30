@@ -17,7 +17,9 @@ public class ContactAddressTests extends TestBase {
     app.goTo().openHomePage();
     if (app.contact().list().size() == 0) {
       app.goTo().AddNewContactPage();
-      app.contact().create(new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street"), true);
+      app.contact().create(new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street")
+              .withGroup("test1").withHomePhone("111").withMobilePhone("222").withWorkPhone("333")
+              .withEmail("test@test.tt").withAddress("Street"), true);
       app.goTo().openHomePage();
     }
   }

@@ -36,14 +36,14 @@ public class ContactDetailTest extends TestBase {
   private String mergeContactInfo(ContactData contact) {
     return Arrays.asList(contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), contact.getNickname()
             , contact.getAddress(), contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()
-            , contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+            , contact.getEmail(), contact.getEmail2(), contact.getEmail3(), "Memberof:test1")
             .stream().filter(s -> ! s.equals(""))
             .map(ContactDetailTest::cleaned)
             .collect(Collectors.joining(""));
   }
 
   private String cleaned(WebElement contactInfo){
-    String contact = contactInfo.getText().replaceAll("[-()]", "").replace("test@test.tt", "").replace("H:", "")
+    String contact = contactInfo.getText().replaceAll("[-()]", "").replace("www.test.tt", "").replace("H:", "")
             .replace("M:", "").replace("W:", "").replace(" ", "").replace("\n", "").replace(" ", "");
     return contact;
   }
