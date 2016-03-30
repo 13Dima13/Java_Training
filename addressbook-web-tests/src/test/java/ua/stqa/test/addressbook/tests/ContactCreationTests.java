@@ -20,7 +20,7 @@ public class ContactCreationTests extends TestBase {
     app.goTo().AddNewContactPage();
     ContactData contact = new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street")
             .withGroup("test1").withHomePhone("111").withMobilePhone("222").withWorkPhone("333")
-    .withEmail("test@test.tt").withAddress("Street");
+            .withEmail("test@test.tt").withAddress("Street");
     app.contact().create(contact, true);
     app.goTo().openHomePage();
     Contacts after = app.contact().all();
@@ -29,4 +29,23 @@ public class ContactCreationTests extends TestBase {
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
   }
+
+  @Test
+  public void testBadContactCreation() {
+    app.goTo().openHomePage();
+    Contacts before = app.contact().all();
+    app.goTo().AddNewContactPage();
+    ContactData contact = new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street")
+            .withGroup("test44").withHomePhone("111").withMobilePhone("222").withWorkPhone("333")
+            .withEmail("test@test.tt").withAddress("Street");
+    app.contact().create(contact, true);
+    app.goTo().openHomePage();
+    Contacts after = app.contact().all();
+    assertThat(after.size(), equalTo(before.size() + 1));
+    assertThat(after, equalTo(
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
+
+
+
 }
