@@ -5,6 +5,8 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.NoSuchElementException;
 
+import java.io.File;
+
 
 public class HelperBase {
   protected WebDriver wd;
@@ -17,7 +19,8 @@ public class HelperBase {
     wd.findElement(locator).click();
   }
 
-  public void type(By locator, String text) {
+  protected void type(By locator, String text) {
+    click(locator);
     if (text != null) {
       String existingText = wd.findElement(locator).getAttribute("value");
       if (!text.equals(existingText)) {
@@ -26,6 +29,14 @@ public class HelperBase {
       }
     }
   }
+  protected void attach(By locator, File file) {
+    if (file != null) {
+      //String existingText = wd.findElement(locator).getAttribute("value"); //убираем оптимизацию существующего с тем что хотим ввести
+      //if (!file.equals(existingText)) {
+        //wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(file.getAbsolutePath());
+      }
+    }
 
   public boolean isAlertPresent() {
     try {

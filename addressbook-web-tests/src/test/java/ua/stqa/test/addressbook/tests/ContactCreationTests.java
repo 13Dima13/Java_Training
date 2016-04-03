@@ -22,7 +22,7 @@ public class ContactCreationTests extends TestBase {
     app.goTo().AddNewContactPage();
     File photo = new File("src/test/resources/body.png");
     ContactData contact = new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street")
-            .withGroup("test1").withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withPhoto(photo)
+           .withGroup("test1").withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withPhoto(photo)
             .withEmail("test@test.tt").withAddress("Street");
     app.contact().create(contact, true);
     app.goTo().openHomePage();

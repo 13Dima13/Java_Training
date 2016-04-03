@@ -9,6 +9,7 @@ import org.testng.Assert;
 import ua.stqa.test.addressbook.model.ContactData;
 import ua.stqa.test.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("home"), contactData.getHomePhone());
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("work"), contactData.getWorkPhone());
-    type(By.name("photo"), contactData.getPhoto().getAbsolutePath());
+    attach(By.name("photo"), contactData.getPhoto());
 
 
     if (creation) {
@@ -64,7 +65,8 @@ public class ContactHelper extends HelperBase {
 
   public void create(ContactData contactData, boolean b) {
 
-    fillContactForm(new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street").withGroup("test1").withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withEmail("test@test.tt"), true);
+    File photo = new File("src/test/resources/body.png");
+    fillContactForm(new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street").withGroup("test1").withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withEmail("test@test.tt").withPhoto(photo), true);
     submitContactCreation();
     contactCashe = null;
   }
