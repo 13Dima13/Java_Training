@@ -19,6 +19,17 @@ public class ContactData extends TestBase {
   private  String nickname;
   private  String email2;
   private  String email3;
+  private File photo;
+
+  public File getPhoto() {
+    return photo;
+
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public ContactData withNickname (String nickname) {
     this.nickname = nickname;
