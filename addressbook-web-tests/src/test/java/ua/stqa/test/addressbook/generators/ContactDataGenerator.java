@@ -63,7 +63,7 @@ public class ContactDataGenerator {
     System.out.println(new File(".").getAbsolutePath());
     Writer writer = new FileWriter(file);
     for (ContactData contact : contacts) {
-      writer.write(String.format("%s;%s;%s\n",
+      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s\n",
               contact.getFirstName(), contact.getLastName(),
               contact.getAddress(), contact.getGroup(),
               contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(),
@@ -80,7 +80,7 @@ public class ContactDataGenerator {
       contacts.add(new ContactData()
               .withFirstName(String.format("FirstName %s", i))
               .withLastName(String.format("Lastname %s", i))
-              .withGroup(String.format("test1 %s, i"))
+              .withGroup(String.format("test1 %s", i))
               .withHomePhone(String.format("111 %s", i))
               .withMobilePhone(String.format("222 %s", i))
               .withWorkPhone(String.format("333 %s", i))
