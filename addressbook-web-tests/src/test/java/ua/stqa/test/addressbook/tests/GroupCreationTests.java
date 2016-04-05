@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ua.stqa.test.addressbook.model.GroupData;
 import ua.stqa.test.addressbook.model.Groups;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,12 +16,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GroupCreationTests extends TestBase {
 
   @DataProvider //провайдер тестовых данных
-  public Iterator<Object[]> validGroups(){
+  public Iterator<Object[]> validGroups() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-
-    list.add(new Object[] {new GroupData().withName("test1").withHeader("header 1").withFooter("footer 1")}); //наборы тестовых данных
-    list.add(new Object[] {new GroupData().withName("test2").withHeader("header 2").withFooter("footer 2")}); // каждый массив содержит набор для 1 теста
-    list.add(new Object[] {new GroupData().withName("test3").withHeader("header 3").withFooter("footer 3")});
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+    String line = reader.readLine();
+    while (line != null) { //цикл на проверку всех строк в файле
+      String[] split = line.split(";");
+      list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+      line = reader.readLine();
+    }
     return list.iterator();
   }
 
