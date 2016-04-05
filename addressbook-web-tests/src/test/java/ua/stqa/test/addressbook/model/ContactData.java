@@ -1,10 +1,14 @@
 package ua.stqa.test.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import ua.stqa.test.addressbook.tests.TestBase;
 
 import java.io.File;
+@XStreamAlias("contact")
 
 public class ContactData extends TestBase {
+  @XStreamOmitField
   private int id;
   private  String firstName;
   private  String middleName;
@@ -187,6 +191,8 @@ public class ContactData extends TestBase {
             '}';
 
   }
-  }
+
+
+}
 
 
