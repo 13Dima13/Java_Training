@@ -2,6 +2,7 @@ package ua.stqa.test.addressbook.generators;
 
 
 import com.beust.jcommander.JCommander;
+import com.thoughtworks.xstream.XStream;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import ua.stqa.test.addressbook.model.GroupData;
@@ -20,6 +21,9 @@ public class GroupDataGenerator {
   @Parameter (names = "-f", description = "Target file")
   public String file;
 
+  @Parameter (names = "-d", description = "Data format")
+  public String format;
+
   public static void main(String[] args) throws IOException {
     GroupDataGenerator generator = new GroupDataGenerator();
     JCommander jCommander = new JCommander(generator);
@@ -37,10 +41,29 @@ public class GroupDataGenerator {
   private void run() throws IOException {
 
     List<GroupData> groups = generatorGroups(count);
-    save(groups, new File(file));
+    if (format.equals("csv")) {
+      saveAsCsv(groups, new File(file));
+    } else if (format.equals("xml")){
+      saveAsXml(groups, new File(file));
+    }else {
+      System.out.println("Wrong format file" + format);
+    }
   }
 
-  private  void save(List<GroupData> groups, File file) throws IOException {
+
+  private void saveAsXml(List<GroupData> groups, File file) throws IOException {
+        XStream xstream = new XStream();
+    xstream.processAnnotations(GroupData.class);
+
+
+        xstream.processAnnotations(GroupData.class); // внести изменения в груп дата
+        String xml = xstream.toXML(groups);
+        Writer writer = new FileWriter(file);
+        writer.write(xml);
+        writer.close();
+  }
+
+  private  void saveAsCsv (List<GroupData> groups, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath()); //для проверки пути (вывод инфы)
     Writer writer = new FileWriter(file);
     for (GroupData group : groups) {
