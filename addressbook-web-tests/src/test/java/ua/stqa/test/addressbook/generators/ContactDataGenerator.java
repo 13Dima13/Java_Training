@@ -30,7 +30,7 @@ public class ContactDataGenerator {
     ContactDataGenerator generator = new ContactDataGenerator();
     JCommander jCommander = new JCommander(generator);
     try {
-      jCommander.parse(args);
+      jCommander.parse(args); // args - те опции которые переданны в командной строке
     } catch (ParameterException ex){
       jCommander.usage();
       return;
@@ -51,7 +51,7 @@ public class ContactDataGenerator {
 
   private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
     XStream xstream = new XStream();
-    xstream.processAnnotations(ContactData.class);
+    xstream.processAnnotations(ContactData.class); // внести изменения в контакт дата
     String xml = xstream.toXML(contacts);
     Writer writer = new FileWriter(file);
     writer.write(xml);
@@ -59,10 +59,10 @@ public class ContactDataGenerator {
   }
 
 
-  private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
-    System.out.println(new File(".").getAbsolutePath());
-    Writer writer = new FileWriter(file);
-    for (ContactData contact : contacts) {
+  private void saveAsCsv(List<ContactData> contacts, File file) throws IOException { //список который сгенерили для контактов сохраняем в файл
+    System.out.println(new File(".").getAbsolutePath());                            //для проверки пути (вывод инфы)
+    Writer writer = new FileWriter(file);                                          //открываем файл на запись
+    for (ContactData contact : contacts) {                                        //проходимся в цикле по всем группам и каждую из них записываем
       writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s\n",
               contact.getFirstName(), contact.getLastName(),
               contact.getAddress(), contact.getGroup(),
@@ -71,10 +71,10 @@ public class ContactDataGenerator {
 
 
     }
-    writer.close();
+    writer.close();  //закрыть файл
   }
 
-  private List<ContactData> generateContacts(int count) {
+  private List<ContactData> generateContacts(int count) { //генерим тестовые данные
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
       contacts.add(new ContactData()
