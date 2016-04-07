@@ -56,34 +56,33 @@ public class ContactDataGenerator {
   private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) { //автозакрытие
+      writer.write(json);
+    }
   }
 
   private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
     XStream xstream = new XStream();
     xstream.processAnnotations(ContactData.class); // внести изменения в контакт дата
     String xml = xstream.toXML(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
+    try (Writer writer = new FileWriter(file)){
+      writer.write(xml);
+    }
   }
 
 
   private void saveAsCsv(List<ContactData> contacts, File file) throws IOException { //список который сгенерили для контактов сохраняем в файл
     System.out.println(new File(".").getAbsolutePath());                            //для проверки пути (вывод инфы)
-    Writer writer = new FileWriter(file);                                          //открываем файл на запись
-    for (ContactData contact : contacts) {                                        //проходимся в цикле по всем группам и каждую из них записываем
-      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s\n",
-              contact.getFirstName(), contact.getLastName(),
-              contact.getAddress(), contact.getGroup(),
-              contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(),
-              contact.getEmail()));
+    try (Writer writer = new FileWriter(file)){
+      for (ContactData contact : contacts) {                                        //проходимся в цикле по всем группам и каждую из них записываем
+        writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s\n",
+                contact.getFirstName(), contact.getLastName(),
+                contact.getAddress(), contact.getGroup(),
+                contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(),
+                contact.getEmail()));
 
-
+      }
     }
-    writer.close();  //закрыть файл
   }
 
   private List<ContactData> generateContacts(int count) { //генерим тестовые данные

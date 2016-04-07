@@ -57,31 +57,28 @@ public class GroupDataGenerator {
   private void saveAsJson(List<GroupData> groups, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(groups);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) { //try для закрытия, закроется автоматом как завершится запись
+      writer.write(json);
+    }
   }
 
 
   private void saveAsXml(List<GroupData> groups, File file) throws IOException {
     XStream xstream = new XStream();
-    xstream.processAnnotations(GroupData.class);
-
-
     xstream.processAnnotations(GroupData.class); // внести изменения в груп дата
     String xml = xstream.toXML(groups);
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) { //try для закрытия, закроется автоматом как завершится запись
+      writer.write(xml);
+    }
   }
 
   private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath()); //для проверки пути (вывод инфы)
-    Writer writer = new FileWriter(file);
-    for (GroupData group : groups) {
+    try (Writer writer = new FileWriter(file)){
+            for (GroupData group : groups) {
       writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
+      }
     }
-    writer.close();
   }
 
   private List<GroupData> generatorGroups(int count) {

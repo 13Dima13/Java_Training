@@ -1,15 +1,5 @@
 [
   {
-    "firstName": "FirstName 0",
-    "lastName": "Lastname 0",
-    "group": "test1 0",
-    "mobilePhone": "222 0",
-    "homePhone": "111 0",
-    "workPhone": "333 0",
-    "address": "Street 0",
-    "email": "test@test.tt 0"
-  },
-  {
     "firstName": "FirstName 1",
     "lastName": "Lastname 1",
     "group": "test1 1",
@@ -28,5 +18,15 @@
     "workPhone": "333 2",
     "address": "Street 2",
     "email": "test@test.tt 2"
+  },
+  {
+    "firstName": "FirstName 3",
+    "lastName": "Lastname 3",
+    "group": "test1 3",
+    "mobilePhone": "222 3",
+    "homePhone": "111 3",
+    "workPhone": "333 3",
+    "address": "Street 3",
+    "email": "test@test.tt 3"
   }
 ]
