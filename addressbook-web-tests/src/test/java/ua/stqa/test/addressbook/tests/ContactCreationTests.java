@@ -31,13 +31,12 @@ public class ContactCreationTests extends TestBase {
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))){
       String json = "";
       String line = reader.readLine();
-      while (line !=null){ //цикл на проверку всех строк в файле
+      while (line != null && !line.equals("")) { //цикл на проверку всех строк в файле
         json += line;
         line = reader.readLine();
       }
       Gson gson = new Gson();
       List<ContactData>  contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType()); // List<GroupData>.class
-      XStream xstream = new XStream();
       return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
   }
@@ -47,7 +46,7 @@ public class ContactCreationTests extends TestBase {
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
       String xml = "";
       String line = reader.readLine();
-      while (line !=null){
+      while (line != null && !line.equals("")) {
         xml += line;
         line = reader.readLine();
       }
@@ -61,15 +60,16 @@ public class ContactCreationTests extends TestBase {
   @Test (dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
     app.goTo().openHomePage();
-    Contacts before = app.contact().all();
+    Contacts before = (Contacts) app.contact().all();
     app.goTo().AddNewContactPage();
-    app.contact().create(contact, true);
-    app.goTo().openHomePage();
+    File photo = new File("src/test/resources/body.png");
+    app.goTo().AddNewContactPage();
+    app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
+    assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-
   }
 
   @Test (enabled =  false)  //старый тест с добавлением фото
@@ -81,7 +81,7 @@ public class ContactCreationTests extends TestBase {
     ContactData contact = new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street")
             .withGroup("test1").withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withPhoto(photo)
             .withEmail("test@test.tt").withAddress("Street");
-    app.contact().create(contact, true);
+    app.contact().create(contact);
     app.goTo().openHomePage();
     Contacts after = app.contact().all();
     assertThat(after.size(), equalTo(before.size() + 1));
@@ -90,7 +90,7 @@ public class ContactCreationTests extends TestBase {
 
   }
 
-  @Test (enabled =  false)
+  @Test //(enabled =  false)
   public void testBadContactCreation() {
     app.goTo().openHomePage();
     Contacts before = app.contact().all();
@@ -98,7 +98,7 @@ public class ContactCreationTests extends TestBase {
     ContactData contact = new ContactData().withFirstName("FirstName").withLastName("Lastname").withAddress("Street")
             .withGroup("test44").withHomePhone("111").withMobilePhone("222").withWorkPhone("333")
             .withEmail("test@test.tt").withAddress("Street");
-    app.contact().create(contact, true);
+    app.contact().create(contact);
     app.goTo().openHomePage();
     Contacts after = app.contact().all();
     assertThat(after.size(), equalTo(before.size() + 1));
