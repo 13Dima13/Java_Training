@@ -1,5 +1,6 @@
 package ua.stqa.test.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import ua.stqa.test.addressbook.tests.TestBase;
@@ -10,16 +11,27 @@ import java.io.File;
 public class ContactData extends TestBase {
   @XStreamOmitField
   private int id;
+  @Expose
   private  String firstName;
+  @Expose
   private  String middleName;
+  @Expose
   private  String lastName;
+  @Expose
   private  String group;
+  @Expose
   private  String mobilePhone;
+  @Expose
   private  String homePhone;
+  @Expose
   private  String workPhone;
+  @Expose
   private  String allPhones;
+  @Expose
   private  String address;
+  @Expose
   private  String email;
+  @Expose
   private  String nickname;
   private  String email2;
   private  String email3;
