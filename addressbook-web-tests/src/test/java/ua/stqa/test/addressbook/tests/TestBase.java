@@ -7,7 +7,7 @@ import ua.stqa.test.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    ApplicationManager app;
+   public static ApplicationManager app;
 
 
     @BeforeSuite
