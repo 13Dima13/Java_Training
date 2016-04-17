@@ -20,7 +20,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
-org.slf4j.Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
+
 
   @DataProvider //провайдер тестовых данных
   public Iterator<Object[]> validGroupsFromJson() throws IOException {
@@ -56,8 +56,6 @@ org.slf4j.Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
 
   @Test(dataProvider = "validGroupsFromJson") //указываем дата провайдер у теста
   public void testGroupCreation(GroupData group) {
-    logger.info("Start test testGroupCreation");
-
       app.goTo().groupPage();
       Groups before = app.group().all();
       app.group().create(group);
@@ -65,7 +63,6 @@ org.slf4j.Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
       assertThat(app.group().count(), equalTo(before.size() +1));
       assertThat(after, equalTo(
               before.withAdded(group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
-    logger.info("Stop test testGroupCreation");
   }
 
   @Test
