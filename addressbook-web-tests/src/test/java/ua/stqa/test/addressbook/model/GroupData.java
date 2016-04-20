@@ -3,17 +3,32 @@ package ua.stqa.test.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @XStreamAlias("group")
+@Entity // ан0тация для того чтобы сделать привязку к БД
+@Table(name = "group_list")
 
 public class GroupData {
   @XStreamOmitField // анотация того что сохраним в файл формата xml
+  @Id // подсказка что это айдишник
+  @Column(name = "group_id") // тк имена атрибутов не совпадают мы должны расставить подсказки для hibernate
   private  int id =Integer.MAX_VALUE;
   @Expose
+  @Column(name = "group_name") // перобразование типов происходит автоматически
   private  String name;
   @Expose
+  @Column(name = "group_header")
+  @Type(type = "text")
   private  String header;
   @Expose
+  @Column(name = "group_footer")
+  @Type(type = "text")
   private  String footer;
 
   public int getId() {
