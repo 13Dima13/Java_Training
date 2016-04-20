@@ -1,61 +1,93 @@
 package ua.stqa.test.addressbook.model;
 
-import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 import ua.stqa.test.addressbook.tests.TestBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.File;
+
 @XStreamAlias("contact")
+@Entity
+@javax.persistence.Table(name = "addressbook")
 
 public class ContactData extends TestBase {
   @XStreamOmitField
+  @Id
+  @Column(name = "id")
   private int id;
-  @Expose
-  private  String firstName;
-  @Expose
-  private  String middleName;
-  @Expose
-  private  String lastName;
-  @Expose
-  private  String group;
-  @Expose
-  private  String mobilePhone;
-  @Expose
-  private  String homePhone;
-  @Expose
-  private  String workPhone;
-  @Expose
-  private  String allPhones;
-  @Expose
-  private  String address;
-  @Expose
-  private  String email;
-  @Expose
-  private  String nickname;
-  private  String email2;
-  private  String email3;
-  private File photo;
 
-  public File getPhoto() {
-    return photo;
+  @Column(name = "firstname")
+  private String firstName;
 
-  }
+  @Column(name = "middlename")
+  private String middleName;
+
+
+  @Column(name = "lastname")
+  private String lastName;
+
+  @Transient
+  private String group;
+
+  @Column(name = "mobile")
+  @Type(type = "text")
+  private String mobilePhone;
+
+  @Column(name = "home")
+  @Type(type = "text")
+  private String homePhone;
+
+  @Column(name = "work")
+  @Type(type = "text")
+  private String workPhone;
+
+  @Transient
+  private String allPhones;
+
+  @Column(name = "address")
+  @Type(type = "text")
+  private String address;
+
+  @Column(name = "email")
+  @Type(type = "text")
+  private String email;
+
+  @Column(name = "nickname")
+  private String nickname;
+  @Column(name = "email2")
+  @Type(type = "text")
+  private String email2;
+  @Column(name = "email3")
+  @Type(type = "text")
+  private String email3;
+  @Column(name = "photo")
+  @Type(type = "text")
+  private  String photo;
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
+  public File getPhoto() {
+    return new File(photo);
+  }
 
-  public ContactData withNickname (String nickname) {
+  public ContactData withNickname(String nickname) {
     this.nickname = nickname;
     return this;
   }
-  public ContactData withEmail2 (String email2) {
+
+  public ContactData withEmail2(String email2) {
     this.email2 = email2;
     return this;
   }
-  public ContactData withEmail3 (String email3) {
+
+  public ContactData withEmail3(String email3) {
     this.email3 = email3;
     return this;
   }
@@ -85,11 +117,11 @@ public class ContactData extends TestBase {
   }
 
 
-
   public ContactData withId(int id) {
     this.id = id;
     return this;
   }
+
   public int getId() {
     return id;
   }
@@ -98,6 +130,7 @@ public class ContactData extends TestBase {
     this.firstName = firstName;
     return this;
   }
+
   public String getFirstName() {
     return firstName;
   }
@@ -106,6 +139,7 @@ public class ContactData extends TestBase {
     this.middleName = middleName;
     return this;
   }
+
   public String getMiddleName() {
     return middleName;
   }
@@ -114,6 +148,7 @@ public class ContactData extends TestBase {
     this.lastName = lastName;
     return this;
   }
+
   public String getLastName() {
     return lastName;
   }
@@ -122,6 +157,7 @@ public class ContactData extends TestBase {
     this.group = group;
     return this;
   }
+
   public String getGroup() {
     return group;
   }
@@ -130,6 +166,7 @@ public class ContactData extends TestBase {
     this.mobilePhone = mobilePhone;
     return this;
   }
+
   public String getMobilePhone() {
     return mobilePhone;
   }
@@ -138,6 +175,7 @@ public class ContactData extends TestBase {
     this.workPhone = workPhone;
     return this;
   }
+
   public String getWorkPhone() {
     return workPhone;
   }
@@ -146,22 +184,25 @@ public class ContactData extends TestBase {
     this.homePhone = homePhone;
     return this;
   }
+
   public String getHomePhone() {
     return homePhone;
   }
 
-  public ContactData withAllPhones (String allPhones) {
+  public ContactData withAllPhones(String allPhones) {
     this.allPhones = allPhones;
     return this;
   }
+
   public String getAllPhones() {
     return allPhones;
   }
 
-  public ContactData withAddress (String address) {
+  public ContactData withAddress(String address) {
     this.address = address;
     return this;
   }
+
   public String getAddress() {
     return address;
   }
@@ -170,6 +211,7 @@ public class ContactData extends TestBase {
     this.email = email;
     return this;
   }
+
   public String getEmail() {
     return email;
   }
