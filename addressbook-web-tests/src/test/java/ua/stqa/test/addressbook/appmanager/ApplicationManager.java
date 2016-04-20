@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager  {
+public class ApplicationManager {
   private final Properties properties;
   WebDriver wd;
   private SessionHelper sessionHelper;
@@ -21,6 +21,7 @@ public class ApplicationManager  {
   private GroupHelper groupHelper;
   private ContactHelper contactHelper;
   private String browser;
+  private DBHelper dbHelper;
 
   public ApplicationManager(String browser) throws IOException {
     this.browser = browser;
@@ -47,7 +48,9 @@ public class ApplicationManager  {
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+    dbHelper = new DBHelper();
   }
+
   public void stop() {
     wd.quit();
   }
@@ -62,6 +65,10 @@ public class ApplicationManager  {
 
   public NavigationHelper goTo() {
     return navigationHelper;
+  }
+
+  public DBHelper db() {
+    return dbHelper;
   }
 
 
