@@ -26,19 +26,46 @@ public class ContactHelper extends HelperBase {
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
-    type(By.name("firstname"), contactData.getFirstName());
-    type(By.name("middlename"), contactData.getMiddleName());
-    type(By.name("lastname"), contactData.getLastName());
-    type(By.name("email"), contactData.getEmail());
-    type(By.name("address"), contactData.getAddress());
-    type(By.name("home"), contactData.getHomePhone());
-    type(By.name("mobile"), contactData.getMobilePhone());
-    type(By.name("work"), contactData.getWorkPhone());
-    attach(By.name("photo"), contactData.getPhoto());
+    if (contactData.getFirstName() != null) {
+      type(By.name("firstname"), contactData.getFirstName());
+    }
+    if (contactData.getMiddleName() != null) {
+      type(By.name("middlename"), contactData.getMiddleName());
+    }
+    if (contactData.getLastName() != null) {
+      type(By.name("lastname"), contactData.getLastName());
+    }
+    if (contactData.getNickname() != null) {
+      type(By.name("nickname"), contactData.getNickname());
+    }
+    if (contactData.getPhoto() != null) {
+      attach(By.name("photo"), contactData.getPhoto());
+    }
+    if (contactData.getAddress() != null) {
+      type(By.name("address"), contactData.getAddress());
+    }
+    if (contactData.getHomePhone() != null) {
+      type(By.name("home"), contactData.getHomePhone());
+    }
+    if (contactData.getMobilePhone() != null) {
+      type(By.name("mobile"), contactData.getMobilePhone());
+    }
+    if (contactData.getWorkPhone() != null) {
+      type(By.name("work"), contactData.getWorkPhone());
+    }
+    if (contactData.getEmail() != null) {
+      type(By.name("email"), contactData.getEmail());
+    }
+    if (contactData.getEmail2() != null) {
+      type(By.name("email2"), contactData.getEmail2());
+    }
+    if (contactData.getEmail3() != null) {
+      type(By.name("email3"), contactData.getEmail3());
+    }
 
 
     if (creation) {
-      if(contactData.getGroups().size() > 0) {
+      if (contactData.getGroups().size() > 0) {
         Assert.assertTrue(contactData.getGroups().size() == 1);
         new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
       } else {
@@ -52,6 +79,18 @@ public class ContactHelper extends HelperBase {
 
   }
 
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+  }
+  public void deleteFromGroup(String groupName, int id) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupName);
+    selectContactById(id);
+    click(By.name("remove"));
+  }
+  public void addToGroup(String groupName) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groupName);
+    click(By.name("add"));
+  }
 
   public void editContact(int index) {
     wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).get(index).click();
