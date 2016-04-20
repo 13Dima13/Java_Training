@@ -5,11 +5,10 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 import ua.stqa.test.addressbook.tests.TestBase;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -68,6 +67,20 @@ public class ContactData extends TestBase {
   @Column(name = "photo")
   @Type(type = "text")
   private  String photo;
+
+  @ManyToMany
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
+  public ContactData inGroup (GroupData group){
+    groups.add(group);
+    return this;
+  }
 
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();

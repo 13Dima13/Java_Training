@@ -28,6 +28,7 @@ public class ContactPhoneTest extends TestBase {
     ContactData contact = app.db().contacts().iterator().next(); // загружаем множество контактов
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact); // выбираем контакт случайным образом
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));  //contact.getAllPhones() загружаем телефоны с главной страницы
+    verifyContactListInUI();
   }
 
   private String mergePhones(ContactData contact) {  // выбрасываем ненужные пустые строки и склеиваем строки
