@@ -20,7 +20,7 @@ public class ContactDetailTest extends TestBase {
       app.goTo().AddNewContactPage();
       app.contact().create(new ContactData().withFirstName("FirstName")
               .withLastName("Lastname").withGroup("test1").withHomePhone("111").withMobilePhone("222")
-              .withWorkPhone("333").withAddress("Street").withEmail("test@test.tt"), true);
+              .withWorkPhone("333").withAddress("Street").withEmail("test@test.tt"));
       app.goTo().openHomePage();
     }
   }
@@ -33,7 +33,6 @@ public class ContactDetailTest extends TestBase {
     String contactInf = cleaned(contactInfo);
     String contactFromEdit = mergeContactInfo(contactInfoFromEditForm);
     assertThat(contactInf, equalTo(contactFromEdit));
-    verifyContactListInUI();
   }
 
   private String mergeContactInfo(ContactData contact) {
