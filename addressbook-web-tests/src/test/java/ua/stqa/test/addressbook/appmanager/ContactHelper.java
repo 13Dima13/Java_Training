@@ -25,6 +25,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
+<<<<<<< HEAD
   public void fillContactForm(ContactData contactData, boolean creation) {
     if (contactData.getFirstName() != null) {
       type(By.name("firstname"), contactData.getFirstName());
@@ -72,6 +73,25 @@ public class ContactHelper extends HelperBase {
         Assert.assertFalse(isElementPresent(By.name("new_group")));
       }
     }
+=======
+  public void fillContactForm(ContactData contactData) {
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("middlename"), contactData.getMiddleName());
+    type(By.name("lastname"), contactData.getLastName());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("home"), contactData.getHomePhone());
+    type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("work"), contactData.getWorkPhone());
+    attach(By.name("photo"), contactData.getPhoto());
+
+
+   // if (creation) {
+    //  new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+   // } else {
+     // Assert.assertFalse(isElementPresent(By.name("new_group")));
+    //}
+>>>>>>> parent of c4fc684... HW18 start
   }
 
   public void deleteContact() {
@@ -105,16 +125,17 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void create(ContactData contactData) {
+  public void create(ContactData contact) {
+
     File photo = new File("src/test/resources/body.png");
-    fillContactForm(contactData, false);
+    fillContactForm(contact);
     submitContactCreation();
     contactCashe = null;
   }
 
   public void modify(ContactData contact) {
     editContactById(contact.getId());
-    fillContactForm(contact, false);
+    fillContactForm(contact);
     submitContactModificatio();
     contactCashe = null;
   }

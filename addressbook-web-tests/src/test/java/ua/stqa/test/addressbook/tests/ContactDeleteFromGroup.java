@@ -30,14 +30,14 @@ public class ContactDeleteFromGroup  extends TestBase {
   public void testContactDeleteFromGroup() {
     Contacts contacts = app.db().contacts();
     Groups groups = app.db().groups();
-    ContactsAndGroups before = app.db().contactsGroups();
+    ContactAddGroup before = app.db().contactsGroups();
     int contactId = contacts.iterator().next().getId();
     GroupData group = groups.iterator().next();
     int groupId = group.getId();
     String groupName = group.getName();
     ContactsGroupsData contactsGroup = new ContactsGroupsData().withContactId(contactId).withGroupId(groupId);
     app.contact().deleteFromGroup(groupName, contactId);
-    ContactsAndGroups after = app.db().contactsGroups();
+    ContactAddGroup after = app.db().contactsGroups();
     assertThat(after, equalTo(before.withOut(contactsGroup)));
   }
 }

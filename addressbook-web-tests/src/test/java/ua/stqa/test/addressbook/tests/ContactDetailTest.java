@@ -20,7 +20,7 @@ public class ContactDetailTest extends TestBase {
       app.goTo().AddNewContactPage();
       app.contact().create(new ContactData().withFirstName("FirstName")
               .withLastName("Lastname").withGroup("test1").withHomePhone("111").withMobilePhone("222")
-              .withWorkPhone("333").withAddress("Street").withEmail("test@test.tt"));
+              .withWorkPhone("333").withAddress("Street").withEmail("test@test.tt"), true);
       app.goTo().openHomePage();
     }
   }
