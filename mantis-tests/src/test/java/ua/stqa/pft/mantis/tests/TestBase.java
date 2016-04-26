@@ -8,7 +8,7 @@ import java.io.File;
 
 public class TestBase {
  protected static final ApplicationManager app
-         = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
+         = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
 
   @BeforeSuite
@@ -20,7 +20,7 @@ public class TestBase {
   @AfterSuite (alwaysRun = true)
 
     public void tearDown() throws Exception  {
-      app.ftp().restore("config_inc.php.bak", "config_inc.php");
+    app.ftp().restore("config_inc.php.bak", "config_inc.php");
     app.stop();
   }
 
