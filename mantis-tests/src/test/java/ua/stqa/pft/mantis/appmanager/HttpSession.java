@@ -35,7 +35,7 @@ public class HttpSession {
     post.setEntity(new UrlEncodedFormEntity(params)); // упаковываем полученные параметры
     CloseableHttpResponse response = httpClient.execute(post); // отправялем запрос
     String body = getTextFrom(response); // берем текст ответа
-    return body.contains(java.lang.String.format("<span class=\"italic\">%s<span>", username));
+    return body.contains(java.lang.String.format("<span class=\"italic\">%s</span>", username));
 
   }
 
