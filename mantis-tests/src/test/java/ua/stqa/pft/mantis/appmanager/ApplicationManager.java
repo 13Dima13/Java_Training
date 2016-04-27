@@ -21,6 +21,9 @@ public class ApplicationManager {
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
+  private NavigationHelper navigationHelper;
+  private DbHelper dbHelper;
+  private ChangePassword authorization;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -81,6 +84,24 @@ public class ApplicationManager {
     }
     return mailHelper;
   }
+    public NavigationHelper goTo() throws Exception {
+        if (navigationHelper == null) {
+            navigationHelper = new NavigationHelper(this);
+          }
+        return  navigationHelper;
+      }
+
+
+           public DbHelper db() {
+        return dbHelper;
+            }
+
+            public ChangePassword changePassword() throws Exception {
+        if (authorization == null) {
+            authorization = new ChangePassword(this);
+          }
+        return  authorization;
+      }
 
 }
 
