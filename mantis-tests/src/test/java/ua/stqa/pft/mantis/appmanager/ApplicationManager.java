@@ -23,7 +23,8 @@ public class ApplicationManager {
   private MailHelper mailHelper;
   private NavigationHelper navigationHelper;
   private DbHelper dbHelper;
-  private ChangePassword authorization;
+  private ChangePassword changePassword;
+  private SoapHelper soap;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -36,9 +37,8 @@ public class ApplicationManager {
   }
 
   public void stop() {
-    if (wd != null) {
-      wd.quit();
-    }
+    if (wd != null){
+      wd.quit();}
   }
 
   public HttpSession newSession() {
@@ -50,14 +50,21 @@ public class ApplicationManager {
   }
 
   public RegistrationHelper registration() {
-    if (registrationHelper == null) {
-      registrationHelper = new RegistrationHelper(this); // возвращаем ссылку на самого себя
+    if (registrationHelper == null){
+      registrationHelper = new RegistrationHelper(this); // возвращаем ссылку на самого себе
     }
     return registrationHelper;
   }
 
+  public FtpHelper ftp() {
+    if (ftp == null){
+      ftp = new FtpHelper(this);
+    }
+    return ftp;
+  }
+
   public WebDriver getDriver() {
-    if (wd == null) {
+    if (wd == null){
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
       } else if (browser.equals(BrowserType.CHROME)) {
@@ -72,36 +79,37 @@ public class ApplicationManager {
     return wd;
   }
 
-  public FtpHelper ftp() {
-    if (ftp == null) {
-      ftp = new FtpHelper(this);
-    }
-    return ftp;
-  }
   public MailHelper mail(){
     if (mailHelper == null) {
       mailHelper = new MailHelper(this);
     }
     return mailHelper;
   }
-    public NavigationHelper goTo() throws Exception {
-        if (navigationHelper == null) {
-            navigationHelper = new NavigationHelper(this);
-          }
-        return  navigationHelper;
-      }
+
+  public NavigationHelper goTo() throws Exception {
+    if (navigationHelper == null) {
+      navigationHelper = new NavigationHelper(this);
+    }
+    return  navigationHelper;
+  }
 
 
-           public DbHelper db() {
-        return dbHelper;
-            }
+  public DbHelper db() {
+    return dbHelper;
+  }
 
-            public ChangePassword changePassword() throws Exception {
-        if (authorization == null) {
-            authorization = new ChangePassword(this);
-          }
-        return  authorization;
-      }
+  public ChangePassword changePassword() throws Exception {
+    if (changePassword == null) {
+      changePassword = new ChangePassword(this);
+    }
+    return  changePassword;
+  }
 
+  public SoapHelper soap() {
+    if (soap == null) {
+      soap = new SoapHelper(this);
+    }
+    return  soap;
+  }
 }
 
